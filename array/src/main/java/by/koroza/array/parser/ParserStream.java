@@ -1,0 +1,26 @@
+package by.koroza.array.parser;
+
+import java.util.Arrays;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class ParserStream {
+	private static final Logger LOGGER = LogManager.getLogger();
+	private static final String REG_EX_SPACE = "\\s+";
+	private static final String INFO_FOUND_CORRECT_LINE = "Found correct line: ";
+	private static final String INFO_ARRAY_DOUBLE_NUMBERS = ", array double numbers: ";
+
+	public double[] parseLine(String line) {
+		if (line != null) {
+			double[] arrayDoubleNumbers = Arrays.stream(line.split(REG_EX_SPACE))
+					.mapToDouble(number -> Double.parseDouble(number)).toArray();
+			LOGGER.log(Level.INFO,
+					INFO_FOUND_CORRECT_LINE + line + INFO_ARRAY_DOUBLE_NUMBERS + Arrays.toString(arrayDoubleNumbers));
+			return arrayDoubleNumbers;
+		} else {
+			return new double[0];
+		}
+	}
+}
