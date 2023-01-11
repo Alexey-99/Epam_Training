@@ -1,0 +1,18 @@
+2022-12-05 13:38:54:0935 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countEvenNumbers - The array has the following number of even numbers: 3
+2022-12-05 13:38:54:0970 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countNegativeNumbers - The array has the following number of negative numbers: 2
+2022-12-05 13:38:54:0994 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countOddNumbers - The array has the following number of odd numbers: 4
+2022-12-05 13:38:55:0011 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countPositiveNumbers - The array has the following number of positive numbers: 5
+2022-12-05 13:38:55:0085 INFO  by.koroza.array.service.impl.ServiceArrayImpl.findMaxNumber - Max number of array is 9.0
+2022-12-05 13:38:55:0108 INFO  by.koroza.array.service.impl.ServiceArrayImpl.findMinNumber - Min number of array is -5.0
+2022-12-05 13:38:55:0137 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countNegativeNumbers - The array has the following number of negative numbers: 2
+2022-12-05 13:38:55:0144 INFO  by.koroza.array.service.impl.ServiceArrayImpl.findNegativeNumbersOfArray - Negative numbers of array is [-1.0, -5.0]
+2022-12-05 13:38:55:0185 INFO  by.koroza.array.service.impl.ServiceArrayImpl.countPositiveNumbers - The array has the following number of positive numbers: 5
+2022-12-05 13:38:55:0188 INFO  by.koroza.array.service.impl.ServiceArrayImpl.findPositiveNumbersOfArray - Positive numbers of array is [1.0, 9.0, 2.0, 0.0, 8.0]
+2022-12-05 13:38:55:0210 INFO  by.koroza.array.service.impl.ServiceArrayImpl.sumElementsOfArray - Sum elements of array is 14.0
+2022-12-05 13:38:55:0215 INFO  by.koroza.array.service.impl.ServiceArrayImpl.middleNumberOfArray - Middle number of array is 2.0
+2022-12-05 13:38:55:0247 INFO  by.koroza.array.service.impl.ServiceArrayImpl.replacingEvenNumbersWith - The array with replacing even numbers: [1.0, 9.0, 100.0, -1.0, 100.0, -5.0, 100.0]
+2022-12-05 13:38:55:0263 INFO  by.koroza.array.service.impl.ServiceArrayImpl.replacingNegativeNumbersWith - The array with replacing negative numbers: [1.0, 9.0, 2.0, 100.0, 0.0, 100.0, 8.0]
+2022-12-05 13:38:55:0295 INFO  by.koroza.array.service.impl.ServiceArrayImpl.replacingNumberWith - The array with replacing selected number: [1.0, 9.0, 2.0, -1.0, 100.0, -5.0, 8.0]
+2022-12-05 13:38:55:0314 INFO  by.koroza.array.service.impl.ServiceArrayImpl.replacingOddNumbersWith - The array with replacing odd numbers: [100.0, 100.0, 2.0, 100.0, 0.0, 100.0, 8.0]
+2022-12-05 13:38:55:0341 INFO  by.koroza.array.service.impl.ServiceArrayImpl.replacingPositiveNumbersWith - The array with replacing positive numbers: [100.0, 100.0, 100.0, -1.0, 100.0, -5.0, 100.0]
+2022-12-05 13:38:55:0360 INFO  by.koroza.array.service.impl.ServiceArrayImpl.sumElementsOfArray - Sum elements of array is 14.0
