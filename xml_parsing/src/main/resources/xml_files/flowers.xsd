@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.flowers.com/Flowers" xmlns:tns="http://www.flowers.com/Flowers">
+	<xsd:element name="Flowers">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Flower" type="tns:Flower" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="Flower">
+		<xsd:sequence>
+			<xsd:element name="Name" type="tns:Name" />
+			<xsd:element name="Soils" type="tns:Soils" />
+			<xsd:element name="Origin" type="tns:Origin" />
+			<xsd:element name="VisualParameters" type="tns:VisualParameters" />
+			<xsd:element name="GrowingTips" type="tns:GrowingTips" />
+			<xsd:element name="Multiplying" type="tns:Multiplying" />
+			<xsd:element name="PlantingDate" type="xsd:dateTime"></xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="tns:ID" use="required" />
+	</xsd:complexType>
+	<xsd:simpleType name="ID">
+		<xsd:restriction base="xsd:ID">
+			<xsd:pattern value="\w+" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Name">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(\w+(\s?\w))+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Soils">
+		<xsd:sequence>
+			<xsd:element name="Soil" type="tns:Soil" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Soil">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w+(\s\w+)*"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Origin">
+		<xsd:sequence>
+			<xsd:element name="Region" type="tns:Region" />
+			<xsd:element name="Century" type="tns:Century"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Region">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([A-Z][a-z]+(\s[A-Za-z]+)*)|[A-Z]+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Century">
+		<xsd:restriction base="xsd:positiveInteger">
+			<xsd:pattern value="\d{2}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="VisualParameters">
+		<xsd:sequence>
+			<xsd:element name="StemColor" type="xsd:string" default="green" />
+			<xsd:element name="LeafColor" type="xsd:string" default="green" />
+			<xsd:element name="AveragePlantSize" type="tns:AveragePlantSize"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AveragePlantSize">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:positiveInteger">
+				<xsd:attribute name="measure" type="tns:Measure" default="sm"></xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Measure">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[a-z]+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="GrowingTips">
+		<xsd:sequence>
+			<xsd:element name="Temperature" type="tns:Temperature" />
+			<xsd:element name="Lighting" type="xsd:boolean" default="true" />
+			<xsd:element name="Watering" type="tns:Watering" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Temperature">
+		<xsd:simpleContent>
+			<xsd:extension base="tns:Temperature-content">
+				<xsd:attribute name="measure" type="tns:Temperature-measure" default="°C"></xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Temperature-content">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(\+|\-)\d+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Temperature-measure">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Watering">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:positiveInteger">
+				<xsd:attribute name="measure" type="tns:Watering-measure"></xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Watering-measure">
+		<xsd:restriction base=" xsd:string">
+			<xsd:pattern value="[a-z]+\/[a-z]+"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Multiplying">
+		<xsd:sequence>
+			<xsd:element name="Method" maxOccurs="7">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="SEEDS"></xsd:enumeration>
+						<xsd:enumeration value="LAYERING"></xsd:enumeration>
+						<xsd:enumeration value="GRAFTING FROM BUDS (BUDDING)"></xsd:enumeration>
+						<xsd:enumeration value="CUTTINGS"></xsd:enumeration>
+						<xsd:enumeration value="DIVISION OF RHIZOMES"></xsd:enumeration>
+						<xsd:enumeration value="DIVISION THE BUSH"></xsd:enumeration>
+						<xsd:enumeration value="DIVISION TUBERS"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

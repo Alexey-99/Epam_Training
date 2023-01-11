@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Flowers xmlns="http://www.flowers.com/Flowers" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.flowers.com/Flowers flowers.xsd">
+	<Flower id="f1">
+		<Name>Rose</Name>
+		<Soils>
+			<Soil>light</Soil>
+			<Soil>loamy</Soil>
+			<Soil>medium loamy</Soil>
+		</Soils>
+		<Origin>
+			<Region>Persia</Region>
+			<Century>19</Century>
+		</Origin>
+		<VisualParameters>
+			<StemColor>green</StemColor>
+			<LeafColor>green</LeafColor>
+			<AveragePlantSize measure="sm">70</AveragePlantSize>
+		</VisualParameters>
+		<GrowingTips>
+			<Temperature measure="°C">-5</Temperature>
+			<Lighting>true</Lighting>
+			<Watering measure="ml/week">10</Watering>
+		</GrowingTips>
+		<Multiplying>
+			<Method>SEEDS</Method>
+			<Method>LAYERING</Method>
+			<Method>GRAFTING FROM BUDS (BUDDING)</Method>
+			<Method>CUTTINGS</Method>
+		</Multiplying>
+		<PlantingDate>2015-03-06T10:23:05</PlantingDate>
+	</Flower>
+	<Flower id="f2">
+		<Name>Alstroemeria</Name>
+		<Soils>
+			<Soil>clay</Soil>
+			<Soil>sandy</Soil>
+		</Soils>
+		<Origin>
+			<Region>Peru</Region>
+			<Century>17</Century>
+		</Origin>
+		<VisualParameters>
+			<StemColor>green</StemColor>
+			<LeafColor>green</LeafColor>
+			<AveragePlantSize measure="sm">150</AveragePlantSize>
+		</VisualParameters>
+		<GrowingTips>
+			<Temperature measure="°C">+19</Temperature>
+			<Lighting>true</Lighting>
+			<Watering measure="ml/week">5</Watering>
+		</GrowingTips>
+		<Multiplying>
+			<Method>SEEDS</Method>
+			<Method>GRAFTING FROM BUDS (BUDDING)</Method>
+		</Multiplying>
+		<PlantingDate>2018-08-20T12:08:10</PlantingDate>
+	</Flower>
+	<Flower id="f3">
+		<Name>Aquilegia Colombian</Name>
+		<Soils>
+			<Soil>loose moist</Soil>
+		</Soils>
+		<Origin>
+			<Region>Colombia</Region>
+			<Century>15</Century>
+		</Origin>
+		<VisualParameters>
+			<StemColor>green</StemColor>
+			<LeafColor>green</LeafColor>
+			<AveragePlantSize measure="sm">100</AveragePlantSize>
+		</VisualParameters>
+		<GrowingTips>
+			<Temperature measure="°C">+18</Temperature>
+			<Lighting>true</Lighting>
+			<Watering measure="ml/week">6</Watering>
+		</GrowingTips>
+		<Multiplying>
+			<Method>SEEDS</Method>
+			<Method>DIVISION THE BUSH</Method>
+		</Multiplying>
+		<PlantingDate>2008-02-01T08:11:05</PlantingDate>
+	</Flower>
+	<Flower id="f4">
+		<Name>Amorphophallus titanic</Name>
+		<Soils>
+			<Soil>garden soil and sand</Soil>
+		</Soils>
+		<Origin>
+			<Region>Sumatra island</Region>
+			<Century>18</Century>
+		</Origin>
+		<VisualParameters>
+			<StemColor>green</StemColor>
+			<LeafColor>green</LeafColor>
+			<AveragePlantSize measure="sm">300</AveragePlantSize>
+		</VisualParameters>
+		<GrowingTips>
+			<Temperature measure="°C">+25</Temperature>
+			<Lighting>true</Lighting>
+			<Watering measure="ml/week">20</Watering>
+		</GrowingTips>
+		<Multiplying>
+			<Method>DIVISION TUBERS</Method>
+		</Multiplying>
+		<PlantingDate>2021-11-04T09:11:05</PlantingDate>
+	</Flower>
+	<Flower id="f5">
+		<Name>African daisies</Name>
+		<Soils>
+			<Soil>fertile loose</Soil>
+		</Soils>
+		<Origin>
+			<Region>South Africa</Region>
+			<Century>13</Century>
+		</Origin>
+		<VisualParameters>
+			<StemColor>green</StemColor>
+			<LeafColor>green</LeafColor>
+			<AveragePlantSize measure="sm">23</AveragePlantSize>
+		</VisualParameters>
+		<GrowingTips>
+			<Temperature measure="°C">+15</Temperature>
+			<Lighting>true</Lighting>
+			<Watering measure="ml/week">15</Watering>
+		</GrowingTips>
+		<Multiplying>
+			<Method>SEEDS</Method>
+		</Multiplying>
+		<PlantingDate>2003-04-05T08:09:10</PlantingDate>
+	</Flower>
+</Flowers>
