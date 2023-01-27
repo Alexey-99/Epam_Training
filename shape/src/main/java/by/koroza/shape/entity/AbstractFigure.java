@@ -1,11 +1,6 @@
 package by.koroza.shape.entity;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public abstract class AbstractFigure {
-	private static final Logger LOGGER = LogManager.getLogger();
 	private static final Warehouse WAREHOUSE = Warehouse.getInstance();
 	private static int count = 1;
 	private int id;
