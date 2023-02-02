@@ -23,9 +23,14 @@
 
 package by.koroza.multithreading.main;
 
+import by.koroza.multithreading.entity.Campany;
+import by.koroza.multithreading.entity.HookahBar;
+
 public class Main {
 
 	public static void main(String[] args) {
-
+		Campany campany = new Campany("Stark Industry");
+		campany.addEstablishment(new HookahBar());
+		campany.addEstablishment(new HookahBar());
 	}
 }
