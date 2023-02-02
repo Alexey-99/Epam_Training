@@ -14,4 +14,10 @@ public interface HookahMaker {
 
 	public void hookahRoomCleaning();
 
+	public int hashCode();
+
+	public boolean equals(Object object);
+
+	public String toString();
+
 }

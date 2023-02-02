@@ -11,8 +11,9 @@ public interface Receptionist {
 
 	public HookahRoom getFreeHookahRoom(Computer computer); // isHavingFreeHookahRoom() - true
 
-	public boolean isHavingFreePlacesInHookahRooms(Computer computer); // isHavingFreeHookahRoom() - false; If one -
-																		// four Clients
+	public boolean isHavingFreePlacesInHookahRooms(Computer computer, int numberClients); // isHavingFreeHookahRoom() -
+																							// false; If one -
+	// four Clients
 
 	public HookahRoom getFreePlacesInHookahRoom(Computer computer);// isHavingFreePlacesInHookahRooms() - true
 
