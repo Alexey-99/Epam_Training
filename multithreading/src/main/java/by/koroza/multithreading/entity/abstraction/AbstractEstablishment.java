@@ -5,7 +5,7 @@ public abstract class AbstractEstablishment {
 	private long id;
 
 	public AbstractEstablishment() {
-		this.setId(count++);
+		this.id = count++;
 	}
 
 	public long getId() {

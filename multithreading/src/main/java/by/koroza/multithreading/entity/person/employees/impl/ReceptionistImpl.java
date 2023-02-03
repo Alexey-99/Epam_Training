@@ -5,9 +5,10 @@ package by.koroza.multithreading.entity.person.employees.impl;
 
 import by.koroza.multithreading.entity.Computer;
 import by.koroza.multithreading.entity.abstraction.AbstractEmployees;
+import by.koroza.multithreading.entity.person.GroupClients;
 import by.koroza.multithreading.entity.person.employees.Receptionist;
 import by.koroza.multithreading.entity.room.HookahRoom;
-import by.koroza.multithreading.stutus.StatusHookahRoom;
+import by.koroza.multithreading.stutus.Status;
 
 public class ReceptionistImpl extends AbstractEmployees implements Receptionist {
 
@@ -15,7 +16,7 @@ public class ReceptionistImpl extends AbstractEmployees implements Receptionist 
 	public boolean isHavingFreeHookahRoom(Computer computer) {
 		boolean result = false;
 		for (HookahRoom room : computer.getHookahRooms()) {
-			if (room.getStatus().equals(StatusHookahRoom.OPEN)) {
+			if (room.getStatus().equals(Status.NOT_BUSY)) {
 				result = true;
 			}
 		}
@@ -26,7 +27,7 @@ public class ReceptionistImpl extends AbstractEmployees implements Receptionist 
 	public HookahRoom getFreeHookahRoom(Computer computer) {
 		HookahRoom hookahRoom = null;
 		for (HookahRoom room : computer.getHookahRooms()) {
-			if (room.getStatus().equals(StatusHookahRoom.OPEN)) {
+			if (room.getStatus().equals(Status.NOT_BUSY)) {
 				hookahRoom = room;
 			}
 		}
@@ -34,17 +35,20 @@ public class ReceptionistImpl extends AbstractEmployees implements Receptionist 
 	}
 
 	@Override
-	public boolean isHavingFreePlacesInHookahRooms(Computer computer, int numberClients) {
-		boolean result = isHavingFreeHookahRoom(computer);
-		if(result == false && numberClients < 5) {
-			for (HookahRoom room : computer.getHookahRooms()) {
-				if (room.getFreePlaces() ) {
-					result = true;
-				}
-			}
+	public void putGroupClientsToHookahRoom(Computer computer, GroupClients clients) {
+		if (isHavingFreeHookahRoom(computer)) {
+			HookahRoom hookahRoom = getFreeHookahRoom(computer);
+			hookahRoom.setClients(clients);
+			hookahRoom.changeStatusToBusy();
+			// TODO TIMEUNIT
 		}
-		
-		return result;
+	}
+
+	@Override
+	public boolean isHavingFreePlacesInHookahRooms(Computer computer, int numberClients) {
+		// TODO Auto-generated method stub
+
+		return false;
 	}
 
 	@Override
@@ -54,19 +58,21 @@ public class ReceptionistImpl extends AbstractEmployees implements Receptionist 
 	}
 
 	@Override
-	public boolean isHaveingFreeWaitingPlace(Computer computer) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isHaveingFreeWaitingPlace(Computer computer, int numberClients) {
+		return computer.getWaitingRoom().getCountFreeWaitingPlaces() >= numberClients;
 	}
 
 	@Override
-	public void replacePersonToWaitingRoom(Computer computer) {
-		// TODO Auto-generated method stub
+	public void putGroupClientsToWaitingRoom(Computer computer, GroupClients clients) {
+		if (isHaveingFreeWaitingPlace(computer, clients.getClients().length)) {
+			computer.getWaitingRoom().getWaitingPlaces().add(clients);
+			computer.getWaitingRoom().setCountFreeWaitingPlaces(
+					computer.getWaitingRoom().getCountFreeWaitingPlaces() - clients.getClients().length);
+		}
 	}
 
 	@Override
-	public void replacePersonToWaitingArea(Computer computer) {
-		// TODO Auto-generated method stub
+	public void putGroupClientsToWaitingArea(Computer computer, GroupClients clients) {
+		computer.getWaitingArea().getClients().add(clients);
 	}
-
 }

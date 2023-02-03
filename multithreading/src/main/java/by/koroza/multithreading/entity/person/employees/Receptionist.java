@@ -1,6 +1,7 @@
 package by.koroza.multithreading.entity.person.employees;
 
 import by.koroza.multithreading.entity.Computer;
+import by.koroza.multithreading.entity.person.GroupClients;
 import by.koroza.multithreading.entity.room.HookahRoom;
 
 public interface Receptionist {
@@ -11,6 +12,8 @@ public interface Receptionist {
 
 	public HookahRoom getFreeHookahRoom(Computer computer); // isHavingFreeHookahRoom() - true
 
+	public void putGroupClientsToHookahRoom(Computer computer, GroupClients clients);
+
 	public boolean isHavingFreePlacesInHookahRooms(Computer computer, int numberClients); // isHavingFreeHookahRoom() -
 																							// false; If one -
 	// four Clients
@@ -19,11 +22,13 @@ public interface Receptionist {
 
 	// Don't have free hookah room / paleces
 
-	public boolean isHaveingFreeWaitingPlace(Computer computer); // isHavingFreeHookahRoom() &&
-																	// isHavingFreePlacesInHookahRooms() - false
+	public boolean isHaveingFreeWaitingPlace(Computer computer, int numberClients); // isHavingFreeHookahRoom() &&
+	// isHavingFreePlacesInHookahRooms() - false
 
-	public void replacePersonToWaitingRoom(Computer computer);// isHaveingFreeWaitingPlace() - true
+	public void putGroupClientsToWaitingRoom(Computer computer, GroupClients clients);// isHaveingFreeWaitingPlace() -
+																						// true
 
-	public void replacePersonToWaitingArea(Computer computer);// isHaveingFreeWaitingPlace() - false
+	public void putGroupClientsToWaitingArea(Computer computer, GroupClients clients);// isHaveingFreeWaitingPlace() -
+																						// false
 
 }
