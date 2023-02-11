@@ -17,7 +17,7 @@ import by.koroza.multithreading.entity.person.employees.impl.ReceptionistImpl;
 import by.koroza.multithreading.entity.room.HookahRoom;
 import by.koroza.multithreading.entity.room.WaitingRoom;
 import by.koroza.multithreading.exception.CustomException;
-import by.koroza.multithreading.observer.HookahBarUpdater;
+import by.koroza.multithreading.updater.HookahBarUpdater;
 
 public class HookahBar extends AbstractEstablishment {
 	private static final Logger LOGGER = LogManager.getLogger();
