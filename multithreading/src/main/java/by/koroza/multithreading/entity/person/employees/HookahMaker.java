@@ -8,11 +8,11 @@ package by.koroza.multithreading.entity.person.employees;
 
 public interface HookahMaker {
 
-	public void hookahRoomPreparation();
+	public void hookahRoomPreparation() throws InterruptedException;
 
-	public void hookahPreparation();
+	public void hookahPreparation() throws InterruptedException;
 
-	public void hookahRoomCleaning();
+	public void hookahRoomCleaning() throws InterruptedException;
 
 	public int hashCode();
 

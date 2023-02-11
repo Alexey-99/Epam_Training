@@ -3,20 +3,20 @@ package by.koroza.multithreading.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.koroza.multithreading.entity.person.GroupClients;
+import by.koroza.multithreading.entity.person.client.impl.GroupClientsImpl;
 
 public class WaitingAreaOutSideBar {
-	private List<GroupClients> clients;
+	private List<GroupClientsImpl> clients;
 
 	public WaitingAreaOutSideBar() {
 		this.setClients(new ArrayList<>());
 	}
 
-	public List<GroupClients> getClients() {
+	public List<GroupClientsImpl> getClients() {
 		return clients;
 	}
 
-	public void setClients(List<GroupClients> clients) {
+	public void setClients(List<GroupClientsImpl> clients) {
 		this.clients = clients;
 	}
 
@@ -39,12 +39,12 @@ public class WaitingAreaOutSideBar {
 		if (!this.getClass().equals(object.getClass())) {
 			return false;
 		}
-		WaitingAreaOutSideBar other = (WaitingAreaOutSideBar) object;
+		WaitingAreaOutSideBar otherWaitingAreaOutSideBar = (WaitingAreaOutSideBar) object;
 		if (this.clients == null) {
-			if (other.clients != null) {
+			if (otherWaitingAreaOutSideBar.clients != null) {
 				return false;
 			}
-		} else if (!this.clients.equals(other.clients)) {
+		} else if (!this.clients.equals(otherWaitingAreaOutSideBar.clients)) {
 			return false;
 		}
 		return true;

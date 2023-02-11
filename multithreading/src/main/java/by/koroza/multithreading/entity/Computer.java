@@ -1,12 +1,12 @@
 package by.koroza.multithreading.entity;
 
-import java.util.List;
+import java.util.Arrays;
 
 import by.koroza.multithreading.entity.room.HookahRoom;
 import by.koroza.multithreading.entity.room.WaitingRoom;
 
 public class Computer {
-	private List<HookahRoom> hookahRooms;
+	private HookahRoom[] hookahRooms;
 	private WaitingRoom waitingRoom;
 	private WaitingAreaOutSideBar waitingArea;
 
@@ -14,11 +14,11 @@ public class Computer {
 
 	}
 
-	public List<HookahRoom> getHookahRooms() {
+	public HookahRoom[] getHookahRooms() {
 		return hookahRooms;
 	}
 
-	public void setHookahRooms(List<HookahRoom> hookahRooms) {
+	public void setHookahRooms(HookahRoom[] hookahRooms) {
 		this.hookahRooms = hookahRooms;
 	}
 
@@ -88,7 +88,7 @@ public class Computer {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Computer [hookahRooms=");
-		builder.append(hookahRooms);
+		builder.append(Arrays.toString(this.hookahRooms));
 		builder.append(", waitingRoom=");
 		builder.append(waitingRoom);
 		builder.append(", waitingArea=");
@@ -104,7 +104,7 @@ public class Computer {
 			this.computer = new Computer();
 		}
 
-		public ComputerBuilder setHookahRooms(List<HookahRoom> hookahRooms) {
+		public ComputerBuilder setHookahRooms(HookahRoom[] hookahRooms) {
 			this.computer.setHookahRooms(hookahRooms);
 			return this;
 		}

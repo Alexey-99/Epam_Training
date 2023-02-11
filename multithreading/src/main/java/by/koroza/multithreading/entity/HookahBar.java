@@ -1,39 +1,102 @@
 package by.koroza.multithreading.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import by.koroza.multithreading.communication.Communication;
+import by.koroza.multithreading.communication.impl.CommunicatorImpl;
 import by.koroza.multithreading.culculation.Calculator;
 import by.koroza.multithreading.entity.abstraction.AbstractEstablishment;
+import by.koroza.multithreading.entity.person.client.impl.GroupClientsImpl;
 import by.koroza.multithreading.entity.person.employees.impl.ReceptionistImpl;
 import by.koroza.multithreading.entity.room.HookahRoom;
 import by.koroza.multithreading.entity.room.WaitingRoom;
+import by.koroza.multithreading.exception.CustomException;
+import by.koroza.multithreading.observer.HookahBarObserver;
 
 public class HookahBar extends AbstractEstablishment {
-	private List<HookahRoom> hookahRooms;
+	private static final Logger LOGGER = LogManager.getLogger();
+	private static final int DEFAULT_NUMBER_HOOKAH_ROOM = 0;
+	private static final int DEFAULT_NUMBER_WAITING_PLACES = 0;
+	private static final HookahBarObserver hookahBarObserver = new HookahBarObserver();
+	
+	private ReentrantLock lock = new ReentrantLock();
+	private Condition condition = lock.newCondition();
+	
+	private HookahRoom[] hookahRooms;
 	private WaitingRoom waitingRoom;
 	private Reception reception;
 	private WaitingAreaOutSideBar waitingArea;
 
 	public HookahBar() {
-		this.hookahRooms = new ArrayList<>();
-		this.waitingRoom = new WaitingRoom(new Calculator().calcNumberWaitingPlaces(this.hookahRooms));
+		initArrayHookahRooms(DEFAULT_NUMBER_HOOKAH_ROOM);
+		this.waitingRoom = new WaitingRoom(DEFAULT_NUMBER_WAITING_PLACES);
+		this.waitingArea = new WaitingAreaOutSideBar();
 		this.reception = new Reception(new ReceptionistImpl(),
 				new Computer.ComputerBuilder().setHookahRooms(this.hookahRooms).setWaitingRoom(this.waitingRoom)
 						.setWaitingArea(this.waitingArea).build());
-		this.waitingArea = new WaitingAreaOutSideBar();
 	}
 
-	public List<HookahRoom> getHookahRooms() {
+	public HookahBar(int numberHookahRooms) throws CustomException {
+		if (numberHookahRooms >= 0) {
+			initArrayHookahRooms(numberHookahRooms);
+			this.waitingRoom = new WaitingRoom(new Calculator().calcNumberWaitingPlaces(this.hookahRooms));
+			this.waitingArea = new WaitingAreaOutSideBar();
+			this.reception = new Reception(new ReceptionistImpl(),
+					new Computer.ComputerBuilder().setHookahRooms(this.hookahRooms).setWaitingRoom(this.waitingRoom)
+							.setWaitingArea(this.waitingArea).build());
+		} else {
+			LOGGER.log(Level.ERROR,
+					"You entered incorrectly number hookah rooms. Number hookah rooms: " + numberHookahRooms);
+			throw new CustomException(
+					"You entered incorrectly number hookah rooms. Number hookah rooms: " + numberHookahRooms);
+		}
+	}
+
+	public void goToHookahBar(GroupClientsImpl groupClient) {
+		Communication communicator = new CommunicatorImpl();
+		lock.lock();
+		HookahRoom hookahRoom = communicator.communicationReceptionAndClients(this.reception, groupClient, condition);
+		lock.unlock();
+		communicator.communicationHookahMakerAndClients(hookahRoom, groupClient);
+		lock.lock();
+		condition.signalAll();
+		lock.unlock();
+		System.out.println();
+
+	}
+
+	public HookahRoom[] getHookahRooms() {
 		return hookahRooms;
 	}
 
-	public void setHookahRooms(List<HookahRoom> hookahRooms) {
+	public void setHookahRooms(HookahRoom[] hookahRooms) {
 		this.hookahRooms = hookahRooms;
+		hookahBarObserver.updateForSetHookahRooms(this);
 	}
 
-	public void addRoom(HookahRoom hookahRoom) {
-		this.hookahRooms.add(hookahRoom);
+	public void setHookahRooms(int numberHookahRooms) throws CustomException {
+		if (numberHookahRooms >= 0) {
+			initArrayHookahRooms(numberHookahRooms);
+			hookahBarObserver.updateForSetHookahRooms(this);
+		} else {
+			LOGGER.log(Level.ERROR,
+					"You entered incorrectly number hookah rooms. Number hookah rooms: " + numberHookahRooms);
+			throw new CustomException(
+					"You entered incorrectly number hookah rooms. Number hookah rooms: " + numberHookahRooms);
+		}
+	}
+
+	public void addHookahRoom(HookahRoom hookahRoom) {
+		HookahRoom[] otherHookahRooms = new HookahRoom[this.hookahRooms.length + 1];
+		System.arraycopy(this.hookahRooms, 0, otherHookahRooms, 0, this.hookahRooms.length);
+		otherHookahRooms[otherHookahRooms.length - 1] = hookahRoom;
+		this.hookahRooms = otherHookahRooms;
 	}
 
 	public WaitingRoom getWaitingRoom() {
@@ -60,6 +123,13 @@ public class HookahBar extends AbstractEstablishment {
 		this.waitingArea = waitingArea;
 	}
 
+	private void initArrayHookahRooms(int numberHookahRooms) {
+		this.hookahRooms = new HookahRoom[numberHookahRooms];
+		for (int i = 0; i < this.hookahRooms.length; i++) {
+			this.hookahRooms[i] = new HookahRoom();
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
@@ -82,7 +152,7 @@ public class HookahBar extends AbstractEstablishment {
 			if (otherHookahBar.hookahRooms != null) {
 				return false;
 			}
-		} else if (!this.hookahRooms.equals(otherHookahBar.hookahRooms)) {
+		} else if (!Arrays.equals(this.hookahRooms, otherHookahBar.hookahRooms)) {
 			return false;
 		}
 		if (this.reception == null) {
@@ -107,7 +177,7 @@ public class HookahBar extends AbstractEstablishment {
 		StringBuilder builder = new StringBuilder();
 		builder.append(super.toString()).append("\n");
 		builder.append("HookahBar [hookahRooms=");
-		builder.append(this.hookahRooms);
+		builder.append(Arrays.toString(this.hookahRooms));
 		builder.append(", waitingRoom=");
 		builder.append(this.waitingRoom);
 		builder.append(", reception=");
@@ -125,9 +195,13 @@ public class HookahBar extends AbstractEstablishment {
 			this.hookahBar = new HookahBar();
 		}
 
-		public HookahBarBuilder setHookahRooms(List<HookahRoom> hookahRooms) {
+		public HookahBarBuilder setHookahRooms(HookahRoom[] hookahRooms) {
 			hookahBar.setHookahRooms(hookahRooms);
 			return this;
+		}
+
+		public void setHookahRooms(int numberHookahRooms) throws CustomException {
+			hookahBar.setHookahRooms(numberHookahRooms);
 		}
 
 		public HookahBarBuilder setWaitingRoom(WaitingRoom waitingRoom) {

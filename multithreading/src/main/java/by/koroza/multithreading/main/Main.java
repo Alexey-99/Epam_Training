@@ -23,17 +23,46 @@
 
 package by.koroza.multithreading.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import by.koroza.multithreading.entity.Campany;
 import by.koroza.multithreading.entity.HookahBar;
-import by.koroza.multithreading.entity.person.Client;
+import by.koroza.multithreading.entity.person.client.impl.GroupClientsImpl;
+import by.koroza.multithreading.exception.CustomException;
+import by.koroza.multithreading.generation.Generator;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Client[] clients = new Client[1];
-		System.out.println(clients.hashCode());
+	public static void main(String[] args) throws CustomException {
+		Campany campany = createCampanyWithBars(1);
+		createThreads(new Generator().generNumber(1, 15), campany);
+	}
+
+	private static Campany createCampanyWithBars(int numberHookahBars) throws CustomException {
 		Campany campany = new Campany("Stark Industry");
-		campany.addEstablishment(new HookahBar());
-		campany.addEstablishment(new HookahBar());
+		for (int i = 0; i < numberHookahBars; i++) {
+			campany.addEstablishment(new HookahBar(new Generator().generNumber(1, 10)));
+		}
+		return campany;
+	}
+
+	private static void createThreads(int numberThreads, Campany campany) throws CustomException {
+		List<GroupClientsImpl> threads = new ArrayList<>();
+		for (int i = 0; i < numberThreads; i++) {
+			threads.add(new GroupClientsImpl(new Generator().generNumber(1, 20),
+					(HookahBar) campany.getEstablishments().get(0)));
+		}
+		System.out.println(
+				"Number hookah rooms: " + ((HookahBar) campany.getEstablishments().get(0)).getHookahRooms().length);
+		System.out.println("Number waiting places: "
+				+ ((HookahBar) campany.getEstablishments().get(0)).getWaitingRoom().getMaxNumberPlaces());
+		System.out.println("Number Group clients: " + threads.size() + "\n");
+		ExecutorService service = Executors.newFixedThreadPool(threads.size());
+		threads.forEach(group -> service.submit(group));
+		service.shutdown();
 	}
 }

@@ -1,34 +1,32 @@
 package by.koroza.multithreading.entity.person.employees;
 
 import by.koroza.multithreading.entity.Computer;
-import by.koroza.multithreading.entity.person.GroupClients;
+import by.koroza.multithreading.entity.person.client.impl.GroupClientsImpl;
 import by.koroza.multithreading.entity.room.HookahRoom;
 
 public interface Receptionist {
 
-	// have free hookah room / paleces
-
 	public boolean isHavingFreeHookahRoom(Computer computer);
 
-	public HookahRoom getFreeHookahRoom(Computer computer); // isHavingFreeHookahRoom() - true
+	public HookahRoom getFreeHookahRoom(Computer computer);
 
-	public void putGroupClientsToHookahRoom(Computer computer, GroupClients clients);
+	public void putGroupClientsToHookahRoom(Computer computer, GroupClientsImpl clients) throws InterruptedException;
 
-	public boolean isHavingFreePlacesInHookahRooms(Computer computer, int numberClients); // isHavingFreeHookahRoom() -
-																							// false; If one -
-	// four Clients
+	public boolean isHaveingFreeWaitingPlace(Computer computer, int numberClients);
 
-	public HookahRoom getFreePlacesInHookahRoom(Computer computer);// isHavingFreePlacesInHookahRooms() - true
+	public void recalculationDebtWaitingPlaces(Computer computer);
 
-	// Don't have free hookah room / paleces
+	public void putGroupClientsToWaitingRoom(Computer computer, GroupClientsImpl clients);
 
-	public boolean isHaveingFreeWaitingPlace(Computer computer, int numberClients); // isHavingFreeHookahRoom() &&
-	// isHavingFreePlacesInHookahRooms() - false
+	public void putGroupClientsToWaitingArea(Computer computer, GroupClientsImpl clients);
 
-	public void putGroupClientsToWaitingRoom(Computer computer, GroupClients clients);// isHaveingFreeWaitingPlace() -
-																						// true
+	public void sayGreeting();
 
-	public void putGroupClientsToWaitingArea(Computer computer, GroupClients clients);// isHaveingFreeWaitingPlace() -
-																						// false
+	public void sayIfHaveFreeHaveHookahRoom(HookahRoom freeHookahRoom);
 
+	public void sayIfNotHaveFreeHaveHookahRoom();
+
+	public void sayIfHaveFreeHaveWaitingPlace();
+
+	public void sayIfNotHaveFreeHaveWaitingPlace();
 }

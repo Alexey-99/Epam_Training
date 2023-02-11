@@ -4,13 +4,12 @@ import java.util.Random;
 
 public class Generator {
 
-	public int generNumberPlacesHookahRoom(int min, int max) {
-		int numberPlaces = 0;
+	public int generNumber(int min, int max) {
+		int number = 0;
 		Random rand = new Random();
 		do {
-			numberPlaces = rand.nextInt(max) + min;
-		} while ((numberPlaces < min) && (numberPlaces > max));
-		return numberPlaces;
+			number = rand.nextInt(max) + min;
+		} while ((number < min) && (number > max));
+		return number;
 	}
-
 }

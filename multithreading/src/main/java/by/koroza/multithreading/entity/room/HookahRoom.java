@@ -1,7 +1,6 @@
 package by.koroza.multithreading.entity.room;
 
 import by.koroza.multithreading.entity.abstraction.AbstractRoom;
-import by.koroza.multithreading.entity.person.GroupClients;
 import by.koroza.multithreading.entity.person.employees.HookahMaker;
 import by.koroza.multithreading.entity.person.employees.impl.HookahMakerImpl;
 import by.koroza.multithreading.stutus.Status;
@@ -12,9 +11,8 @@ import static by.koroza.multithreading.stutus.Status.NOT_BUSY;;
 public class HookahRoom extends AbstractRoom {
 	private HookahMaker hookahMaker;
 	private Status status;
-	private GroupClients clients;
 
-	public HookahRoom(int places) {
+	public HookahRoom() {
 		this.hookahMaker = new HookahMakerImpl();
 		this.status = NOT_BUSY;
 	}
@@ -32,28 +30,20 @@ public class HookahRoom extends AbstractRoom {
 		this.hookahMaker = hookahMaker;
 	}
 
-	public Status getStatus() {
+	public synchronized Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public synchronized void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public void changeStatusToNotBusy() {
+	public synchronized void changeStatusToNotBusy() {
 		this.status = NOT_BUSY;
 	}
 
-	public void changeStatusToBusy() {
+	public synchronized void changeStatusToBusy() {
 		this.status = BUSY;
-	}
-
-	public GroupClients getClients() {
-		return clients;
-	}
-
-	public void setClients(GroupClients clients) {
-		this.clients = clients;
 	}
 
 	@Override
@@ -92,7 +82,13 @@ public class HookahRoom extends AbstractRoom {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append("\n");
+		builder.append("HookahRoom [hookahMaker=");
+		builder.append(this.hookahMaker);
+		builder.append(", status=");
+		builder.append(this.status);
+		builder.append(", toString()=");
+		builder.append(super.toString());
+		builder.append("]");
 		return builder.toString();
 	}
 }

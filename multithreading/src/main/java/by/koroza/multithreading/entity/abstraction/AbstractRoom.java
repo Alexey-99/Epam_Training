@@ -1,27 +1,27 @@
 package by.koroza.multithreading.entity.abstraction;
 
 public abstract class AbstractRoom {
-	private static long countId = 1;
-	private long id;
+	private static long countNumberRoom = 1;
+	private long numberRoom;
 
 	public AbstractRoom() {
-		this.id = countId++;
+		this.numberRoom = countNumberRoom++;
 	}
 
-	public long getId() {
-		return id;
+	public long getNumberRoom() {
+		return numberRoom;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setNumberRoom(long numberRoom) {
+		this.numberRoom = numberRoom;
 	}
 
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
 		int result = 1;
-		result = result * PRIME + Long.hashCode(countId);
-		result = result * PRIME + Long.hashCode(this.id);
+		result = result * PRIME + Long.hashCode(countNumberRoom);
+		result = result * PRIME + Long.hashCode(this.numberRoom);
 		return result;
 	}
 
@@ -37,7 +37,7 @@ public abstract class AbstractRoom {
 			return false;
 		}
 		AbstractRoom otherAbstractRoom = (AbstractRoom) object;
-		if (this.id != otherAbstractRoom.id) {
+		if (this.numberRoom != otherAbstractRoom.numberRoom) {
 			return false;
 		}
 		return true;
@@ -46,7 +46,9 @@ public abstract class AbstractRoom {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ID: ").append(this.id);
+		builder.append("AbstractRoom [number room=");
+		builder.append(this.numberRoom);
+		builder.append("]");
 		return builder.toString();
 	}
 
