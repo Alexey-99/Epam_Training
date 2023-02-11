@@ -17,17 +17,17 @@ import by.koroza.multithreading.entity.person.employees.impl.ReceptionistImpl;
 import by.koroza.multithreading.entity.room.HookahRoom;
 import by.koroza.multithreading.entity.room.WaitingRoom;
 import by.koroza.multithreading.exception.CustomException;
-import by.koroza.multithreading.observer.HookahBarObserver;
+import by.koroza.multithreading.observer.HookahBarUpdater;
 
 public class HookahBar extends AbstractEstablishment {
 	private static final Logger LOGGER = LogManager.getLogger();
 	private static final int DEFAULT_NUMBER_HOOKAH_ROOM = 0;
 	private static final int DEFAULT_NUMBER_WAITING_PLACES = 0;
-	private static final HookahBarObserver hookahBarObserver = new HookahBarObserver();
-	
+	private static final HookahBarUpdater hookahBarUpdater = new HookahBarUpdater();
+
 	private ReentrantLock lock = new ReentrantLock();
 	private Condition condition = lock.newCondition();
-	
+
 	private HookahRoom[] hookahRooms;
 	private WaitingRoom waitingRoom;
 	private Reception reception;
@@ -77,13 +77,13 @@ public class HookahBar extends AbstractEstablishment {
 
 	public void setHookahRooms(HookahRoom[] hookahRooms) {
 		this.hookahRooms = hookahRooms;
-		hookahBarObserver.updateForSetHookahRooms(this);
+		hookahBarUpdater.updateForSetHookahRooms(this);
 	}
 
 	public void setHookahRooms(int numberHookahRooms) throws CustomException {
 		if (numberHookahRooms >= 0) {
 			initArrayHookahRooms(numberHookahRooms);
-			hookahBarObserver.updateForSetHookahRooms(this);
+			hookahBarUpdater.updateForSetHookahRooms(this);
 		} else {
 			LOGGER.log(Level.ERROR,
 					"You entered incorrectly number hookah rooms. Number hookah rooms: " + numberHookahRooms);
