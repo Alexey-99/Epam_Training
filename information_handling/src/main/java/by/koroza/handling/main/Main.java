@@ -47,10 +47,33 @@
 
 package by.koroza.handling.main;
 
+import java.util.List;
+
+import by.koroza.handling.reader.Reader;
+import by.koroza.handling.validation.Validator;
+
 public class Main {
+	private static final String FILE_PATH = "src/main/resources/text.txt";
 
 	public static void main(String[] args) {
-		
+		List<String> text = new Reader().readTextFromFile(FILE_PATH);
+		parseParagraph(text);
+	}
+
+	public static void parseParagraph(List<String> linesText) {
+		String paragraph = "";
+		int indexStartParagraph = 0;
+		for (int i = 0; i < linesText.size(); i++) {
+			if (Validator.isStartParagraph(linesText.get(i))) {
+				indexStartParagraph = i;
+				paragraph = linesText.get(i);
+				//linesText.set(indexStartParagraph, paragraph);
+			} else {
+				paragraph = paragraph + linesText.get(i);
+				linesText.set(indexStartParagraph, paragraph);
+			}
+			// linesText.set(indexStartParagraph, paragraph);
+		}
 	}
 
 }

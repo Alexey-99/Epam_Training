@@ -29,7 +29,7 @@
 		</RollingFile>
 	</Appenders>
 	<Loggers>
-		<Logger name="by.koroza.information_handling" level="TRACE" additivity="false">
+		<Logger name="by.koroza.handling" level="TRACE" additivity="false">
 			<AppenderRef ref="LogToConsole" />
 			<AppenderRef ref="LogToRollingFileInfo" />
 			<AppenderRef ref="LogToRollingFileDebug" />
